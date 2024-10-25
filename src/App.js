@@ -1,24 +1,30 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import UserDashboard from './components/UserDashboard';
+import AdminLogin from './components/AdminLogin';
+import AdminDashboard from './components/AdminDashboard';
+import { AppBar, Toolbar, Button } from '@mui/material';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <AppBar position="static">
+        <Toolbar>
+          <Link to="/" style={{ textDecoration: 'none', color: 'inherit', flexGrow: 1 }}>
+            <Button color="inherit">User Dashboard</Button>
+          </Link>
+          <Link to="/admin-login" style={{ textDecoration: 'none', color: 'inherit' }}>
+            <Button color="inherit">Admin Login</Button>
+          </Link>
+        </Toolbar>
+      </AppBar>
+
+      <Routes>
+        <Route path="/" element={<UserDashboard />} />
+        <Route path="/admin-login" element={<AdminLogin />} />
+        <Route path="/admin-dashboard" element={<AdminDashboard />} />
+      </Routes>
+    </Router>
   );
 }
 
