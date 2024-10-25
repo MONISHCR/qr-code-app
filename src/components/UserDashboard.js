@@ -29,7 +29,7 @@ function UserDashboard() {
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
   useEffect(() => {
-    // Fetch available events when component loads
+    // Fetch available events when the component loads
     const fetchEvents = async () => {
       try {
         const response = await axios.get('https://amb-bac.vercel.app/admin/events');
@@ -44,16 +44,13 @@ function UserDashboard() {
   }, []);
 
   const handleDownload = async () => {
-    const userId = 'placeholder_user_id'; // Replace with your logic
-    const deviceId = 'placeholder_device_id'; // Replace with your logic
-
     try {
-      const response = await axios.post('https://amb-bac.vercel.app/user/download', {
-        eventName: selectedEvent,
-        userId,
-        deviceId,
-      });
-
+      const response = await axios.post(
+        'https://amb-bac.vercel.app/user/download',
+        { eventName: selectedEvent, userId: 'placeholder_user_id' },
+        { withCredentials: true } // Send cookies with the request
+      );
+  
       if (response.data.success) {
         setQRCode(response.data.qrCode);
         setError(''); // Clear any error messages
